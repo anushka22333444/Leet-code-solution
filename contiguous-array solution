@@ -1,0 +1,23 @@
+class Solution {
+    public int findMaxLength(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+		map.put(0, -1); // Initial count of 0s is 0 at index -1
+		int max = 0;
+		int count = 0;
+
+		for (int i = 0; i < nums.length; i++) {
+			// Increment count for 1, decrement for 0
+			count += (nums[i] == 1) ? 1 : -1;
+
+			// If the count has been seen before, update max length
+			if (map.containsKey(count)) {
+				max = Math.max(max, i - map.get(count));
+			} else {
+				// Otherwise, store the current count and its index
+				map.put(count, i);
+			}
+		}
+
+		return max;
+    }
+}
