@@ -1,0 +1,29 @@
+class Solution {
+    public String reversePrefix(String word, char ch) {
+        // Loop through each character of the word
+        // Strings are immutable in java, so we go via character array
+        // For the swaapping operations
+        char[] answer = word.toCharArray();
+        for (int i = 0; i < word.length(); i++) {
+            // If the current character matches the target character
+            if (word.charAt(i) == ch) {
+                int j = 0; // Initialize a pointer `j` to the beginning of the string
+                // Reverse the prefix of the string up to the index `i`
+                while (j < i) {
+                    // Swap characters at positions `j` and `i`
+                    swapChars(answer, j++, i--);
+                }
+                return new String(answer);
+            }
+        }
+        // Return the modified string
+        return word;
+    }
+    
+    // Helper method to swap characters at positions `i` and `j` in a string
+    private void swapChars(char[] answer, int index1, int index2) {
+        char temp = answer[index2];
+        answer[index2] = answer[index1];
+        answer[index1] = temp;
+    }
+}
